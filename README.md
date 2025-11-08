@@ -55,6 +55,22 @@ python scripts/init_supabase_db.py
 
 This will call `init_db()` and create the SQLModel tables in your Supabase Postgres database.
 
+### Remote init via protected endpoint
+
+If you prefer to initialize the DB remotely (without sharing DB credentials here), follow these steps:
+
+1. Set an environment variable `INIT_SECRET` in your Vercel project (Project → Settings → Environment Variables). Use a long random secret.
+2. After Vercel redeploys with the new environment variable, call the protected endpoint:
+
+```powershell
+# Replace <INIT_SECRET> with the value you set in Vercel
+Invoke-RestMethod -Method POST -Uri "https://<your-vercel-deployment>/admin/init-db" -Headers @{"x-init-token" = "<INIT_SECRET>"}
+```
+
+The endpoint will run `init_db()` on the configured database and return a success message.
+
+Security note: `INIT_SECRET` must be kept secret. This endpoint only runs `init_db()` and requires the secret header value.
+
 ### Front-end usage
 
 - See `web/supabaseClient.js` for a small example of creating a Supabase client using `SUPABASE_URL` and `SUPABASE_ANON_KEY`.
