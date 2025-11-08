@@ -5,3 +5,5 @@ qrcode
 pillow
 scikit-learn
 numpy
+psycopg-binary
+supabase
