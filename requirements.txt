@@ -3,7 +3,7 @@ uvicorn[standard]
 sqlmodel
 qrcode
 pillow
-scikit-learn
-numpy
+psycopg-binary
+supabase
 psycopg-binary
 supabase
